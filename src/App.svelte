@@ -1,7 +1,11 @@
 <script lang="ts">
 	import thousands from 'thousands'
 
-	export let seo = {
+  function prettifyPossibleTurnover(turnover: number) {
+    return thousands(turnover.toFixed(2).toString().replace('.', ','), '.')
+  }
+
+	let seo = {
 		turnover: 10000,
 		clickPrice: 1000,
 		workPercent: 70,
@@ -9,7 +13,7 @@
 		percentInquiries: 5,
 	};
 
-	export let adsense = {
+	let adsense = {
 		turnover: 90000,
 		clickPrice: 30,
 		workPercent: 20,
@@ -22,10 +26,10 @@
 	$: percentVisitors = Math.ceil(visitors * 100) / 100;
 
 	$: adsensePossibleTurnover = (adsense.percentInquiries / 100) * adsense.workPercent * adsense.turnover
-	$: adsenseTurnover = thousands(adsensePossibleTurnover.toFixed(2).toString().replace('.', ','), '.')
+	$: adsenseTurnover = prettifyPossibleTurnover(adsensePossibleTurnover)
 	
 	$: seoPossibleTurnover = (seo.percentInquiries / 100) * seo.workPercent * seo.turnover
-	$: seoTurnover = thousands(seoPossibleTurnover.toFixed(2).toString().replace('.', ','), '.')
+	$: seoTurnover = prettifyPossibleTurnover(seoPossibleTurnover)
 
 </script>
 
@@ -38,6 +42,7 @@
         <div class="relative flex">
           <input
             bind:value={adsense.turnover}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="adsense-turnover"
@@ -54,6 +59,7 @@
         <div class="relative flex">
           <input
             bind:value={adsense.clickPrice}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="adsense-clickprice"
@@ -70,6 +76,7 @@
         <div class="relative flex">
           <input
             bind:value={adsense.workPercent}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="adsense-workpercent"
@@ -88,6 +95,7 @@
         <div class="relative flex">
           <input
             bind:value={adsense.percentInquiries}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="adsense-percentinquiries"
@@ -160,6 +168,7 @@
         <div class="relative flex">
           <input
             bind:value={seo.turnover}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="seo-turnover"
@@ -176,6 +185,7 @@
         <div class="relative flex">
           <input
             bind:value={seo.numberOfSearches}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="seo-numberofsearches"
@@ -192,6 +202,7 @@
         <div class="relative flex">
           <input
             bind:value={seo.workPercent}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="seo-workpercent"
@@ -210,6 +221,7 @@
         <div class="relative flex">
           <input
             bind:value={seo.percentInquiries}
+            on:keydown|stopPropagation
             type="number"
             class="form-input w-full font-sans"
             id="seo-percentinquiries"
